@@ -1,65 +1,20 @@
 # xml-parser-moviedata
-Parse movies and actors data from XML for storing them in a DB with below schema.
+Parse movies and actors data from XML and store them in a MYSQL DB with below schema.
 
 | Table Name | Attributes| Notes|
 | ---------- | --------- | ---- |
-| movies     |id:integer (primary key) | title:varchar(100) year:integer | 
-director:varchar(100) 
-banner_url:varchar(200) 
-trailer_url:varchar(200) 
-required, AUTO_INCREMENT
-required 
-required 
-required 
-URL of movie's "poster"; not required 
-URL of trailer; not required
-stars
-id:integer (primary key)
-first_name:varchar(50) 
-last_name:varchar(50) 
-dob:date 
-photo_url:varchar(200) 
-required, AUTO_INCREMENT
-required 
-required 
-not required
-not required
-stars_in_movies
-star_id:integer, referencing stars.id
-movie_id:integer, referencing movies.id
-all attributes required
-genres
-id:integer (primary key)
-name:varchar(32) 
-all attributes required; "id" should be 
-"AUTO_INCREMENT"
-genres_in_movies
-genre_id:integer, referencing genres.id
-movie_id:integer, referencing movies.id
-all attributes required
-customers
-id:integer (primary key)
-first_name:varchar(50) 
-last_name:varchar(50) 
-cc_id:varchar(20), referencing creditcards.id
-address:varchar(200) 
-email:varchar(50) 
-password:varchar(20) 
-all attributes required; "id" should be 
-"AUTO_INCREMENT"
-sales
-id:integer (primary key)
-customer_id:integer, referencing customers.id
-movie_id:integer, referencing movies.id
-sale_date:date 
-all attributes required; "id" should be 
-"AUTO_INCREMENT"
-creditcards
-id:varchar(20), (primary key)
-first_name:varchar(50) 
-last_name:varchar(50) 
-expiration:date 
-all attributes required
+| movies     | <ul><li>id:integer (primary key)</li><li>title:varchar(100)<li>year:integer</li><li>director:varchar(100)</li><li>banner_url:varchar(200)</li><li>trailer_url:varchar(200)</li> | <ul><li>required, AUTO_INCREMENT</li><li>required</li><li>required</li><li>required</li><li>URL of movie's "poster"; not required</li><li>URL of trailer; not required</li> |
+| stars | <ul><li>id:integer (primary key)</li><li>first_name:varchar(50)</li><li>last_name:varchar(50)</li><li>dob:date</li><li>photo_url:varchar(200)</li> | <ul><li>required, AUTO_INCREMENT</li><li>required</li><li>required</li><li>not required</li><li>not required</li></ul> |
+| stars_in_movies | <ul><li>star_id:integer, referencing stars.id</li><li>movie_id:integer, referencing movies.id</li>| all attributes required |
+| genres | <ul><li>id:integer (primary key)</li><li>name:varchar(32)</li></ul> | <ul><li>all attributes required; "id" should be "AUTO_INCREMENT"</li></ul> |
+| genres_in_movies | <ul><li>genre_id:integer, referencing genres.id</li><li>movie_id:integer, referencing movies.id</li></ul>| <ul><li>all attributes required</li></ul> |
+| customers | <ul><li>id:integer (primary key)</li><li>first_name:varchar(50)</li><li>last_name:varchar(50)</li><li>cc_id:varchar(20), referencing creditcards.id</li><li>address:varchar(200)</li><li>email:varchar(50)</li><li>password:varchar(20)</li></ul> | <ul><li>all attributes required; "id" should be "AUTO_INCREMENT"</li></ul> |
+| sales | <ul><li>id:integer (primary key)</li><li>customer_id:integer, referencing customers.id</li><li>movie_id:integer, referencing movies.id</li><li>sale_date:date</li></ul> | <ul><li>all attributes required; "id" should be "AUTO_INCREMENT"</li></ul> |
+| creditcards | <ul><li>id:varchar(20), (primary key)</li><li>first_name:varchar(50)</li><li>last_name:varchar(50)</li><li>expiration:date</li></ul> | <ul><li>all attributes required</li></ul> |
 
-
-If a movie genre exits in database then it must be linked to the movie via entry in 
+Note:
+- Movie data is provided mains243.xml, stars data is provided in actors63.xml, and stars in a movie data procided in casts124.xml
+- If a movie genre encountered, in XML data, is not present in 'genres' table, then a new genre entry must be created
+- Movie genre must be linked to the movie through entry in genres_in_movies table
+- Each star has stage name and real name. Create entries for stars with their real names
+- In casts124.xml maps a movie to star by using an alphanumeric film id of movie obtained from mains243.xml (field not present in movies table, so the mapping of movie to a alphanumeric film id is cached locally), and stage name of star (field not present in stars table, so the mapping of star to star stage name is cached locally). Entries for star and movie relation are made in stars_in_movies table.
