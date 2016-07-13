@@ -13,7 +13,7 @@ Parse movies and actors data from XML and store them in a MYSQL DB with below sc
 | creditcards | <ul><li>id:varchar(20), (primary key)</li><li>first_name:varchar(50)</li><li>last_name:varchar(50)</li><li>expiration:date</li></ul> | <ul><li>all attributes required</li></ul> |
 
 Note:
-- Movie data is provided mains243.xml, stars data is provided in actors63.xml, and stars in a movie data procided in casts124.xml
+- Movie data is provided in mains243.xml, stars data is provided in actors63.xml, and stars in a movie data procided in casts124.xml
 - If a movie genre encountered, in XML data, is not present in 'genres' table, then a new genre entry must be created
 - Movie genre must be linked to the movie through entry in genres_in_movies table
 - Each star has stage name and real name. Create entries for stars with their real names
