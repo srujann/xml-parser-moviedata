@@ -50,7 +50,7 @@ public class ParseMovies {
 		conn.close();
 		final long endTime = System.currentTimeMillis();
 
-		System.out.println("Total execution time: " + (endTime - startTime)/1000.0 + " Seconds");
+		System.out.println("Total execution time: " + (endTime - startTime) / 1000.0 + " Seconds");
 
 	}
 
@@ -146,7 +146,7 @@ public class ParseMovies {
 									try {
 										movieTitle = titleList.item(0).getFirstChild().getNodeValue();
 									} catch (Exception titleError) {
-										//use default movie title
+										// use default movie title
 										movieTitle = "Default";
 									}
 
@@ -155,7 +155,7 @@ public class ParseMovies {
 									try {
 										movieYear = Integer.parseInt(yearList.item(0).getFirstChild().getNodeValue());
 									} catch (Exception e) {
-										//use default movie id
+										// use default movie id
 										movieYear = 1992;
 									}
 
@@ -168,7 +168,7 @@ public class ParseMovies {
 										NodeList dirnLst = dir.getElementsByTagName("dirn");
 										movieDirector = dirnLst.item(0).getFirstChild().getNodeValue();
 									} catch (Exception dirFail) {
-										//use deafult director name
+										// use deafult director name
 										movieDirector = "Default";
 									}
 
@@ -267,7 +267,7 @@ public class ParseMovies {
 				fstNm = null;
 				lastNm = null;
 				date = null;
-				
+
 				Element actorElem = (Element) actorLst.item(i);
 				// Get actor Stagename
 				NodeList stgNmLst = actorElem.getElementsByTagName("stagename");
@@ -408,7 +408,7 @@ public class ParseMovies {
 										ptinsertStarMovie.setInt(1, starId);
 										ptinsertStarMovie.setInt(2, movieId);
 										ptinsertStarMovie.addBatch();
-									} 
+									}
 								}
 							}
 						}
@@ -418,10 +418,12 @@ public class ParseMovies {
 			ptinsertStarMovie.executeBatch();
 			conn.commit();
 			ptinsertStarMovie.close();
-			//PreparedStatement temp = (PreparedStatement) conn.prepareStatement("ALTER IGNORE TABLE stars_in_movies ADD constraint myuniqueconstaint UNIQUE (star_id, movie_id);");
-			//temp.executeUpdate();
-			//temp.close();
-			
+			// PreparedStatement temp = (PreparedStatement)
+			// conn.prepareStatement("ALTER IGNORE TABLE stars_in_movies ADD
+			// constraint myuniqueconstaint UNIQUE (star_id, movie_id);");
+			// temp.executeUpdate();
+			// temp.close();
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
