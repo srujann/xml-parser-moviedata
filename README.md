@@ -25,5 +25,5 @@ Optimizations Implemented:
 - Movies mapping to a film id and Stars mapping to stage name are cached locally rather than on database to improve speed of execution
 
 Dependency:
-- MYSQL JDBC Connector JAR
+- MYSQL JDBC Connector
 
