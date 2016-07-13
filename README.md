@@ -18,6 +18,7 @@ Note:
 - Movie genre must be linked to the movie through entry in genres_in_movies table
 - Each star has stage name and real name. Create entries for stars with their real names
 - In casts124.xml maps a movie to star by using an alphanumeric film id of movie obtained from mains243.xml (field not present in movies table, so the mapping of movie to a alphanumeric film id is cached locally), and stage name of star (field not present in stars table, the mapping of star to star stage name is cached locally). Entries for star and movie relation are made in stars_in_movies table.
+- Intention is to make as many entries as possible from xml data parsed. Wherever data is missing necessary assumptions are made.
 
 Optimizations Implemented:
 - Movies and Stars data are parsed in way that allows batch insert into database
